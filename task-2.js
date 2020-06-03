@@ -15,19 +15,21 @@ const inventory = {
   },
 };
 
+const inventoryAdd = inventory.add.bind(inventory);
+const inventoryRem = inventory.remove.bind(inventory);
+
 const invokeInventoryAction = function (itemName, action) {
   console.log(`Invoking action on ${itemName}`);
-
-  action.call(inventory, itemName);
+  action(itemName);
 };
 
-invokeInventoryAction('Medkit', inventory.add);
+invokeInventoryAction('Medkit', inventoryAdd);
 // Invoking action on Medkit
 // Adding Medkit to inventory
 
 console.log(inventory.items); // ['Knife', 'Gas mask', 'Medkit']
 
-invokeInventoryAction('Gas mask', inventory.remove);
+invokeInventoryAction('Gas mask', inventoryRem);
 // Invoking action on Gas mask
 // Removing Gas mask from inventory
 
